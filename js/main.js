@@ -1,4 +1,4 @@
-import { Game } from "./game.js";
+import { Game, State } from "./game.js";
 
 const inputEl = document.getElementById("entre");
 const validateEl = document.getElementById("validate");
