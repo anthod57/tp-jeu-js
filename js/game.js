@@ -1,4 +1,5 @@
 import { getRandomInt } from "./functions.js";
+import { Score} from "./score.js";
 
 export const State = {
     Idle: Symbol("idle"),
@@ -12,6 +13,8 @@ export const Result = {
 }
 
 export class Game {
+
+    score=new Score();
     state = State.Idle;
 
     constructor() {
@@ -25,7 +28,8 @@ export class Game {
         this._startTime = new Date();
         this.state = State.Started;
         this._attempts = 0;
-    }
+        console.log(this._numberToFind)
+    } 
 
     end() {
         this.state = State.Ended;
@@ -45,6 +49,8 @@ export class Game {
 
         if (number === this._numberToFind) {
             this.end();
+            this.score.addScore('toto',this._attempts);
+            this.score.save()
             return Result.Win;
         }
         if (number > this._numberToFind) {

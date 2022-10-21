@@ -11,6 +11,7 @@ function init() {
     window.addEventListener("DOMContentLoaded", () => {
         validateListener();
         restartListener();
+        game.score.load();
     });
 }
 
