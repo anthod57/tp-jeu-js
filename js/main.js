@@ -2,32 +2,42 @@ import { Game, State, Result } from "./game.js";
 
 const inputEl = document.getElementById("entre");
 const validateEl = document.getElementById("validate");
-const restrat = document.getElementsById("restart");
-const message = document.getElementById("message");
+const restartEl = document.getElementById("restart");
+const messageEl = document.getElementById("message");
 
 let game = new Game();
 
 function init() {
     window.addEventListener("DOMContentLoaded", () => {
         validateListener();
+        restartListener();
     });
 }
 
 function validateListener() {
     validateEl.addEventListener("click", e => {
         e.preventDefault();
-        let res=game.makeAttempt(+inputEl.value);
-        switch(res){
+        let res = game.makeAttempt(+inputEl.value);
+        switch (res) {
             case Result.Win:
-                message.innerText=`You Won with ${game.attempts} attempts`
+                messageEl.innerText = `You Won with ${game.attempts} attempts`;
                 break;
             case Result.Greater:
-                message.innerText='Greater';
+                messageEl.innerText = 'Greater';
                 break;
             case Result.Smaller:
-                message.innerHTML='Smaller';
+                messageEl.innerHTML = 'Smaller';
                 break;
         }
+    })
+}
+
+function restartListener() {
+    restartEl.addEventListener("click", e => {
+        e.preventDefault();
+
+        game = new Game();
+        messageEl.innerText = "";
     })
 }
 
