@@ -1,30 +1,24 @@
 
-
+const score=[]
 export class Score{
-    scores=[];
 
     constructor(){
 
     }
 
-    addScore(nom,score){
-        console.log('add')
-        this.scores.push({'name':nom,'score':score})
+    addScore(nom,scores){
+        score.push({'name':nom,'score':scores})
         this.save();
     }
     save(){
-        console.log('save')
-        localStorage.setItem('scores',JSON.stringify(this.scores));
+        localStorage.setItem('scores',JSON.stringify(score));
     }
     load(){
         let scores= JSON.parse(localStorage.getItem('scores'));
         if(scores){
-            console.log('existing_scores')
             scores.forEach(elem=> {
-                console.log(elem)
-                this.scores.push(elem);
+                score.push(elem);
             });
         }
-        console.log(scores)
     }
 }
