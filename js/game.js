@@ -55,6 +55,7 @@ export class Game {
     }
 
     if (this._attempts === this._config.maxAttempts) {
+      this.end();
       return Result.Lost;
     }
     if (number === this._numberToFind) {
