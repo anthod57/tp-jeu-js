@@ -11,6 +11,16 @@
 		<main>
 			<h1>Jeu plus ou moins</h1>
 			<div class="game">
+				<div class="config-form">
+					<div class="row">
+						<label id="max-attempts-label" for="max-attempts">Max Attempts (20):</label>
+						<input type="range" name="max-attemps" id="max-attempts" min="1" max="20" value="20" step="1" />
+					</div>
+					<div class="row">
+						<label id="max-name-size-label" for="max-name-size">Max Name Size (20):</label>
+						<input type="range" name="max-name-size" id="max-name-size" min="1" max="20" value="20" step="1" />
+					</div>
+				</div>
 				<div class="input">
 					<label for="entre">Entrer un nombre entre 1 et 99</label>
 					<input type="text" id="entre" name="entre" />
