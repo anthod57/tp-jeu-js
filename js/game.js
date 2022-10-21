@@ -1,105 +1,110 @@
 import { getRandomInt } from "./functions.js";
 import { Score } from "./score.js";
-import { UI } from "./ui.js"
+import { UI } from "./ui.js";
 
 export const State = {
-    Idle: Symbol("idle"),
-    Started: Symbol("started"),
-    Ended: Symbol("ended")
-}
+  Idle: Symbol("idle"),
+  Started: Symbol("started"),
+  Ended: Symbol("ended"),
+};
 export const Result = {
-    Win: Symbol('win'),
-    Greater: Symbol('greater'),
-    Smaller: Symbol('smaller')
-}
+  Win: Symbol("win"),
+  Greater: Symbol("greater"),
+  Smaller: Symbol("smaller"),
+};
 
 export class Game {
-    _config = {
-        maxAttempts: 0,
-        //maxStoredScore:0,
-        maxNameSize: 0,
+  _config = {
+    maxAttempts: 0,
+    //maxStoredScore:0,
+    maxNameSize: 0,
+  };
+
+  score = new Score();
+  state = State.Idle;
+
+  constructor() {
+    this._numberToFind = getRandomInt(1, 99);
+    this._attempts = 1;
+    this._endTime = 0;
+    this._startTime = 0;
+  }
+
+  start() {
+    this._startTime = new Date();
+    this.state = State.Started;
+    this._attempts = 1;
+    console.log(this._numberToFind);
+  }
+
+  end() {
+    this.state = State.Ended;
+    this._endTime = new Date();
+  }
+
+  makeAttempt(number) {
+    this._attempts++;
+
+    if (this.state !== State.Started) {
+      if (this._startTime === 0) {
+        this.start();
+      } else {
+        return;
+      }
     }
 
-    score = new Score();
-    state = State.Idle;
+    if (number === this._numberToFind) {
+      this.end();
+      UI.showUserForm();
+      return Result.Win;
+    }
+    if (number > this._numberToFind) {
+      return Result.Smaller;
+    } else {
+      return Result.Greater;
+    }
+  }
 
-    constructor() {
-        this._numberToFind = getRandomInt(1, 99);
-        this._attempts = 1;
-        this._endTime = 0;
-        this._startTime = 0;
+  totalTime() {
+    return Math.round(
+      (this._endTime.getTime() - this._startTime.getTime()) / 1000
+    );
+  }
+
+  saveScore() {
+    if (UI.getUserName() !== "") {
+      this.score.addScore(UI.getUserName(), this._attempts);
+      UI.hideUserForm();
+    }
+  }
+
+  saveConfig() {
+    localStorage.setItem("config", JSON.stringify(this._config));
+  }
+  load() {
+    let config = JSON.parse(localStorage.getItem("config"));
+    if (config) {
+      this._config = config;
+    }
+  }
+
+  set config(_config) {
+    if (this.state === State.Started) {
+      return;
     }
 
-    start() {
-        this._startTime = new Date();
-        this.state = State.Started;
-        this._attempts = 1;
-        console.log(this._numberToFind)
-    }
+    this._config = { ...this._config, ..._config };
+  }
 
-    end() {
-        this.state = State.Ended;
-        this._endTime = new Date();
-    }
+  get config() {
+    return this._config;
+  }
 
-    makeAttempt(number) {
-        this._attempts++;
+  get numberToFind() {
+    return this._numberToFind;
+  }
 
-        if (this.state !== State.Started) {
-            if (this._startTime === 0) {
-                this.start();
-            } else {
-                return;
-            }
-        }
-
-        if (number === this._numberToFind) {
-            this.end();
-            UI.showUserForm()
-            return Result.Win;
-        }
-        if (number > this._numberToFind) {
-            return Result.Smaller;
-        }
-        else {
-            return Result.Greater;
-        }
-    }
-
-    totalTime() {
-        return Math.round((this._endTime.getTime() - this._startTime.getTime()) / 1000);
-    }
-
-    saveScore() {
-        if (UI.getUserName() !== "") {
-            this.score.addScore(UI.getUserName(), this._attempts);
-            UI.hideUserForm()
-        }
-    }
-
-    saveConfig() {
-        localStorage.setItem('config', JSON.stringify(this._config));
-    }
-    load() {
-        let config = JSON.parse(localStorage.getItem('config'));
-        if (config) {
-            this._config = config;
-        }
-    }
-
-    set config(_config) {
-        if (this.state === State.Started) {
-            return;
-        }
-
-        this._config = { ...this._config, ..._config };
-    }
-
-    get numberToFind() {
-        return this._numberToFind;
-    }
-
-    get attempts() {
-        return this._attempts;
-    }
+  get attempts() {
+    return this._attempts;
+  }
 }
