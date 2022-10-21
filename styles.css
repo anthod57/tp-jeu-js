@@ -42,4 +42,17 @@ main .user {
   text-align: center;
 }
 
+.config-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 /*# sourceMappingURL=styles.css.map */
