@@ -24,15 +24,23 @@
 				<span id="message"></span>
 
 				<div class="user" id="user-form" style="display: none">
-					<label for="entre">Entrer votre nom pour sauvegarder votre score!</label>
+					<label for="username">Entrer votre nom pour sauvegarder votre score!</label>
 					<input type="text" id="username" name="username" />
 					<button id="save-score">Sauvegarder</button>
 				</div>
 
 				<div class="leaderboard">
 					<h2>Top Scores</h2>
+
+					<div class="input">
+						<label for="search-by">Chercher un utilisateur</label>
+						<input type="text" id="search-by" name="search-by" />
+					</div>
+
 					<ul id="leaderboard-list"></ul>
 				</div>
+
+				<button name="reset" id="reset">Reset</button>
 			</div>
 		</main>
 		<script type="module" src="js/main.js"></script>

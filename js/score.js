@@ -1,26 +1,41 @@
 import { UI } from "./ui.js";
-const score=[]
-export class Score{
+export let tabScore = []
+export class Score {
 
-    constructor(){
+    constructor() {
 
     }
 
-    addScore(nom,scores){
-        score.push({'name':nom,'score':scores})
+    addScore(nom, scores) {
+        tabScore.push({ 'name': nom, 'score': scores })
         this.save();
     }
-    save(){
-        localStorage.setItem('scores',JSON.stringify(score));
-        UI.populateLeaderboard(score)
+
+    save() {
+        localStorage.setItem('scores', JSON.stringify(tabScore));
+        UI.populateLeaderboard(tabScore)
     }
-    load(){
-        let scores= JSON.parse(localStorage.getItem('scores'));
-        if(scores){
-            scores.forEach(elem=> {
-                score.push(elem);
+
+    load() {
+        let scores = JSON.parse(localStorage.getItem('scores'));
+        if (scores) {
+            scores.forEach(elem => {
+                tabScore.push(elem);
             });
-            UI.populateLeaderboard(score)
+            UI.populateLeaderboard(tabScore)
         }
+    }
+
+    resetScore() {
+        localStorage.clear();
+        tabScore = [];
+        UI.populateLeaderboard(tabScore);
+    }
+
+    searchByName(name) {
+        let res = tabScore.find(e => {
+            return e.name.includes(name);
+        })
+        return res
     }
 }
