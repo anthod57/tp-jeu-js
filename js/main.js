@@ -2,6 +2,7 @@ import { Game, State, Result } from "./game.js";
 
 const inputEl = document.getElementById("entre");
 const validateEl = document.getElementById("validate");
+const restrat = document.getElementsById("restart");
 const message = document.getElementById("message");
 
 let game = new Game();

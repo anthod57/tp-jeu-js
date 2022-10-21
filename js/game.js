@@ -25,8 +25,6 @@ export class Game {
         this._startTime = new Date();
         this.state = State.Started;
         this._attempts = 0;
-
-        console.log(this._numberToFind);
     }
 
     end() {
