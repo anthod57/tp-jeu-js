@@ -18,13 +18,13 @@ export class Game {
         this._numberToFind = getRandomInt(1, 99);
         this._attempts = 0;
         this._endTime = 0;
+        this._startTime = 0;
     }
 
     start() {
-        if (this.state === State.Ended) return;
-
         this._startTime = new Date();
         this.state = State.Started;
+        this._attempts = 0;
 
         console.log(this._numberToFind);
     }
@@ -37,7 +37,13 @@ export class Game {
     makeAttempt(number) {
         this._attempts++;
 
-        if (this.state !== State.Started) this.start();
+        if (this.state !== State.Started) {
+            if (this._startTime === 0) {
+                this.start();
+            } else {
+                return;
+            }
+        }
 
         if (number === this._numberToFind) {
             this.end();
