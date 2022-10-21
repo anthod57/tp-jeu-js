@@ -4,6 +4,7 @@ const inputEl = document.getElementById("entre");
 const validateEl = document.getElementById("validate");
 const restartEl = document.getElementById("restart");
 const messageEl = document.getElementById("message");
+const saveEl = document.getElementById("save-score");
 
 let game = new Game();
 
@@ -11,6 +12,8 @@ function init() {
     window.addEventListener("DOMContentLoaded", () => {
         validateListener();
         restartListener();
+        saveListner();
+        game.score.load();
     });
 }
 
@@ -38,6 +41,15 @@ function restartListener() {
 
         game = new Game();
         messageEl.innerText = "";
+    })
+}
+
+function saveListner() {
+    saveEl.addEventListener("click", e => {
+        e.preventDefault();
+        game.saveScore();
+        inputEl.value = "";
+        messageEl.value = "";
     })
 }
 
