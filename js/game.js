@@ -1,5 +1,5 @@
 import { getRandomInt } from "./functions.js";
-import { Score} from "./score.js";
+import { Score } from "./score.js";
 import { UI } from "./ui.js"
 
 export const State = {
@@ -14,13 +14,13 @@ export const Result = {
 }
 
 export class Game {
-    _config={
-        maxAttemps:0,
+    _config = {
+        maxAttempts: 0,
         //maxStoredScore:0,
-        maxNameSize:0,
+        maxNameSize: 0,
     }
 
-    score=new Score();
+    score = new Score();
     state = State.Idle;
 
     constructor() {
@@ -35,7 +35,7 @@ export class Game {
         this.state = State.Started;
         this._attempts = 1;
         console.log(this._numberToFind)
-    } 
+    }
 
     end() {
         this.state = State.Ended;
@@ -70,28 +70,29 @@ export class Game {
         return Math.round((this._endTime.getTime() - this._startTime.getTime()) / 1000);
     }
 
-    saveScore(){
-        if(UI.getUserName()!==""){
-            this.score.addScore(UI.getUserName(),this._attempts);
+    saveScore() {
+        if (UI.getUserName() !== "") {
+            this.score.addScore(UI.getUserName(), this._attempts);
             UI.hideUserForm()
         }
     }
 
-    saveConfig(){
-        localStorage.setItem('config',JSON.stringify(this._config));
+    saveConfig() {
+        localStorage.setItem('config', JSON.stringify(this._config));
     }
-    load(){
-        let config=JSON.parse(localStorage.getItem('config'));
-        if(config){
-            this._config=config;
+    load() {
+        let config = JSON.parse(localStorage.getItem('config'));
+        if (config) {
+            this._config = config;
         }
     }
 
-    set config(_config){
-        if(this.state===State.Started){
+    set config(_config) {
+        if (this.state === State.Started) {
             return;
         }
-        this._config=_config;
+
+        this._config = { ...this._config, ..._config };
     }
 
     get numberToFind() {
