@@ -1,12 +1,14 @@
 import { Game, State, Result } from "./game.js";
+import { tabScore } from "./score.js";
+import { UI } from "./ui.js";
 
 const inputEl = document.getElementById("entre");
 const validateEl = document.getElementById("validate");
 const restartEl = document.getElementById("restart");
 const messageEl = document.getElementById("message");
 const saveEl = document.getElementById("save-score");
-const resetEl=document.getElementById("reset");
-const searchEl=document.getElementById("search-by");
+const resetEl = document.getElementById("reset");
+const searchEl = document.getElementById("search-by");
 
 let game = new Game();
 
@@ -57,13 +59,26 @@ function saveListner() {
     })
 }
 
-function resetListener(){
-    resetEl.addEventListener("click",e=>{
+function resetListener() {
+    resetEl.addEventListener("click", e => {
         game.score.resetScore();
     })
 }
-function searchListener(){
-    
+function searchListener() {
+    searchEl.addEventListener("keyup", e => {
+        let username = e.target.value;
+
+        if (username === "") {
+            UI.populateLeaderboard(tabScore);
+            return;
+        }
+
+        let find = game.score.searchByName(username);
+
+        if (!find) return;
+
+        UI.populateLeaderboard([find]);
+    })
 }
 
 init();

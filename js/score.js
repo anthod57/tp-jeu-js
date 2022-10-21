@@ -28,13 +28,13 @@ export class Score {
 
     resetScore() {
         localStorage.clear();
-        tabScore=[];
+        tabScore = [];
         UI.populateLeaderboard(tabScore);
     }
 
     searchByName(name) {
         let res = tabScore.find(e => {
-            return e.name == name;
+            return e.name.includes(name);
         })
         return res
     }
