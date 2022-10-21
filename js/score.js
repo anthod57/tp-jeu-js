@@ -10,10 +10,10 @@ export class Score{
     addScore(nom,score){
         console.log('add')
         this.scores.push({'name':nom,'score':score})
+        this.save();
     }
     save(){
         console.log('save')
-        localStorage.clear()
         localStorage.setItem('scores',JSON.stringify(this.scores));
     }
     load(){

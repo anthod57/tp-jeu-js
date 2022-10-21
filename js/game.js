@@ -1,5 +1,6 @@
 import { getRandomInt } from "./functions.js";
 import { Score} from "./score.js";
+import { UI } from "./ui.js"
 
 export const State = {
     Idle: Symbol("idle"),
@@ -49,8 +50,9 @@ export class Game {
 
         if (number === this._numberToFind) {
             this.end();
-            this.score.addScore('toto',this._attempts);
-            this.score.save()
+            //this.score.addScore('toto',this._attempts);
+            // this.score.save()
+            UI.showUserForm()
             return Result.Win;
         }
         if (number > this._numberToFind) {
@@ -63,6 +65,12 @@ export class Game {
 
     totalTime() {
         return Math.round((this._endTime.getTime() - this._startTime.getTime()) / 1000);
+    }
+
+    saveScore(){
+        if(UI.getUserName()!==""){
+            this.score.addScore(UI.getUserName(),this._attempts);
+        }
     }
 
     get numberToFind() {
