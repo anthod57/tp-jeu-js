@@ -1,19 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 	<head>
 		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<link rel="stylesheet" href="styles.css" />
 	</head>
 	<body>
-		<div>Jeu plus ou moins</div>
-		<div>
-			<label for="entre">Entrer un nombre entre 1 et 99</label>
-			<input type="text" id="entre" name="entre" />
-			<input type="button" id="validate" value="Valider" />
-			<input type="button" id="restart" value="Recommencer" />
-			<br />
-			<span id="message"></span>
-		</div>
-		<div id="content"></div>
+		<main>
+			<h1>Jeu plus ou moins</h1>
+			<div class="game">
+				<div class="input">
+					<label for="entre">Entrer un nombre entre 1 et 99</label>
+					<input type="text" id="entre" name="entre" />
+				</div>
+
+				<div class="buttons">
+					<input type="button" id="validate" value="Valider" />
+					<input type="button" id="restart" value="Recommencer" />
+				</div>
+
+				<span id="message"></span>
+
+				<div class="user" id="user-form" style="display: none">
+					<label for="username">Entrer votre nom pour sauvegarder votre score!</label>
+					<input type="text" id="username" name="username" />
+					<button id="save-score">Sauvegarder</button>
+				</div>
+
+				<div class="leaderboard">
+					<h2>Top Scores</h2>
+
+					<div class="input">
+						<label for="search-by">Chercher un utilisateur</label>
+						<input type="text" id="search-by" name="search-by" />
+					</div>
+
+					<ul id="leaderboard-list"></ul>
+				</div>
+
+				<button name="reset" id="reset">Reset</button>
+			</div>
+		</main>
 		<script type="module" src="js/main.js"></script>
 	</body>
 </html>

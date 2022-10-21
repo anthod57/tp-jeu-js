@@ -1,0 +1,45 @@
+main,
+.game {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+  max-height: 300px;
+  overflow-y: auto;
+  width: 100%;
+}
+ul :first-child {
+  font-weight: bolder;
+  font-size: 1.25rem;
+}
+
+main .input,
+main .user {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.leaderboard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+/*# sourceMappingURL=styles.css.map */
