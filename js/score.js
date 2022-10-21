@@ -33,7 +33,7 @@ export class Score {
     }
 
     searchByName(name) {
-        let res = tabScore.find(e => {
+        let res = tabScore.filter(e => {
             return e.name.includes(name);
         })
         return res
