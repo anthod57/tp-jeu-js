@@ -44,6 +44,10 @@ export class Game {
   }
 
   makeAttempt(number) {
+    if (this._attempts === this._config.maxAttempts) {
+      this.end();
+      return Result.Lost;
+    }
     this._attempts++;
 
     if (this.state !== State.Started) {
@@ -54,10 +58,6 @@ export class Game {
       }
     }
 
-    if (this._attempts === this._config.maxAttempts) {
-      this.end();
-      return Result.Lost;
-    }
     if (number === this._numberToFind) {
       this.end();
       UI.showUserForm();
