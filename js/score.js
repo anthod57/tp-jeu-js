@@ -1,5 +1,5 @@
 import { UI } from "./ui.js";
-let score = []
+export let tabScore = []
 export class Score {
 
     constructor() {
@@ -7,33 +7,33 @@ export class Score {
     }
 
     addScore(nom, scores) {
-        score.push({ 'name': nom, 'score': scores })
+        tabScore.push({ 'name': nom, 'score': scores })
         this.save();
     }
 
     save() {
-        localStorage.setItem('scores', JSON.stringify(score));
-        UI.populateLeaderboard(score)
+        localStorage.setItem('scores', JSON.stringify(tabScore));
+        UI.populateLeaderboard(tabScore)
     }
 
     load() {
         let scores = JSON.parse(localStorage.getItem('scores'));
         if (scores) {
             scores.forEach(elem => {
-                score.push(elem);
+                tabScore.push(elem);
             });
-            UI.populateLeaderboard(score)
+            UI.populateLeaderboard(tabScore)
         }
     }
 
     resetScore() {
         localStorage.clear();
-        score=[];
-        UI.populateLeaderboard(score);
+        tabScore=[];
+        UI.populateLeaderboard(tabScore);
     }
 
     searchByName(name) {
-        let res = score.find(e => {
+        let res = tabScore.find(e => {
             return e.name == name;
         })
         return res
