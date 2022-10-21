@@ -9,6 +9,9 @@ const messageEl = document.getElementById("message");
 const saveEl = document.getElementById("save-score");
 const resetEl = document.getElementById("reset");
 const searchEl = document.getElementById("search-by");
+const maxAttemptsEl=document.getElementById("max-attempts");
+//const maxStoredScoreEl=document.getElementById("");
+const maxNameSizeEl=document.getElementById("max-name-size");
 
 let game = new Game();
 

@@ -14,6 +14,11 @@ export const Result = {
 }
 
 export class Game {
+    _config={
+        maxAttemps:0,
+        //maxStoredScore:0,
+        maxNameSize:0,
+    }
 
     score=new Score();
     state = State.Idle;
@@ -70,6 +75,23 @@ export class Game {
             this.score.addScore(UI.getUserName(),this._attempts);
             UI.hideUserForm()
         }
+    }
+
+    saveConfig(){
+        localStorage.setItem('config',JSON.stringify(this._config));
+    }
+    load(){
+        let config=JSON.parse(localStorage.getItem('config'));
+        if(config){
+            this._config=config;
+        }
+    }
+
+    set config(_config){
+        if(this.state===State.Started){
+            return;
+        }
+        this._config=_config;
     }
 
     get numberToFind() {
