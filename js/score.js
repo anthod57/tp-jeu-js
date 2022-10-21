@@ -1,4 +1,4 @@
-
+import { UI } from "./ui.js";
 const score=[]
 export class Score{
 
@@ -12,6 +12,7 @@ export class Score{
     }
     save(){
         localStorage.setItem('scores',JSON.stringify(score));
+        UI.populateLeaderboard(score)
     }
     load(){
         let scores= JSON.parse(localStorage.getItem('scores'));
@@ -19,6 +20,7 @@ export class Score{
             scores.forEach(elem=> {
                 score.push(elem);
             });
+            UI.populateLeaderboard(score)
         }
     }
 }

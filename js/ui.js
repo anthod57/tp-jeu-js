@@ -8,6 +8,7 @@ export class UI {
     }
 
     static hideUserForm() {
+        usernameInputEl.value="";
         userFormEl.style = "display: none";
     }
 
@@ -16,6 +17,7 @@ export class UI {
     }
 
     static populateLeaderboard(scores) {
+        leaderBoardListEl.innerHTML="";
         scores.forEach(x => {
             leaderBoardListEl.innerHTML += `<li>${x.name} - ${x.score}</li>`;
         })

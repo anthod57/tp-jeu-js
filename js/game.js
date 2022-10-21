@@ -50,8 +50,6 @@ export class Game {
 
         if (number === this._numberToFind) {
             this.end();
-            //this.score.addScore('toto',this._attempts);
-            // this.score.save()
             UI.showUserForm()
             return Result.Win;
         }
@@ -70,6 +68,7 @@ export class Game {
     saveScore(){
         if(UI.getUserName()!==""){
             this.score.addScore(UI.getUserName(),this._attempts);
+            UI.hideUserForm()
         }
     }
 
