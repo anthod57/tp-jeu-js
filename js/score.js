@@ -23,4 +23,14 @@ export class Score{
             UI.populateLeaderboard(score)
         }
     }
+    resetScore(){
+        localStorage.clear();
+        UI.populateLeaderboard(score);
+    }
+    searchByName(name){
+        let res=score.find(e=>{
+            return e.name==name;
+        })
+        return res
+    }
 }
