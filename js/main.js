@@ -44,10 +44,12 @@ function restartListener() {
     })
 }
 
-function saveListner(){
-    saveEl.addEventListener("click",e=>{
+function saveListner() {
+    saveEl.addEventListener("click", e => {
         e.preventDefault();
         game.saveScore();
+        inputEl.value = "";
+        messageEl.value = "";
     })
 }
 
