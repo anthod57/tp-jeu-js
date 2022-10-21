@@ -7,13 +7,15 @@ let game = new Game();
 
 function init() {
     window.addEventListener("DOMContentLoaded", () => {
-
+        validateListener();
     });
 }
 
 function validateListener() {
-    validateEl.addEventListener("click", e=>{
-        e.preventDefault()
-        console.log(game.makeAttempt(inputEL.value))
+    validateEl.addEventListener("click", e => {
+        e.preventDefault();
+        console.log(game.makeAttempt(inputEl.value));
     })
 }
+
+init();

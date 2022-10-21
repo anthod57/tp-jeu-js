@@ -5,10 +5,10 @@ export const State = {
     Started: Symbol("started"),
     Ended: Symbol("ended")
 }
-export const Result={
-    Win : Symbol('win'),
-    Greater : Symbol('greater'),
-    Smaller : Symbol('smaller')
+export const Result = {
+    Win: Symbol('win'),
+    Greater: Symbol('greater'),
+    Smaller: Symbol('smaller')
 }
 
 export class Game {
@@ -25,6 +25,8 @@ export class Game {
 
         this._startTime = new Date();
         this.state = State.Started;
+
+        console.log(this._numberToFind);
     }
 
     end() {
@@ -41,10 +43,10 @@ export class Game {
             this.end();
             return Result.Win;
         }
-        if(number>this._numberToFind){
+        if (number > this._numberToFind) {
             return Result.Smaller;
         }
-        else{
+        else {
             return Result.Greater;
         }
     }
