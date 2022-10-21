@@ -20,7 +20,7 @@ export class Game {
 
     constructor() {
         this._numberToFind = getRandomInt(1, 99);
-        this._attempts = 0;
+        this._attempts = 1;
         this._endTime = 0;
         this._startTime = 0;
     }
@@ -28,7 +28,7 @@ export class Game {
     start() {
         this._startTime = new Date();
         this.state = State.Started;
-        this._attempts = 0;
+        this._attempts = 1;
         console.log(this._numberToFind)
     } 
 

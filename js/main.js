@@ -41,12 +41,18 @@ function validateListener() {
     })
 }
 
+function restart(){
+    game = new Game();
+    messageEl.innerText = "";
+    inputEl.value = "";
+    messageEl.value = "";
+}
+
 function restartListener() {
     restartEl.addEventListener("click", e => {
         e.preventDefault();
 
-        game = new Game();
-        messageEl.innerText = "";
+        restart()
     })
 }
 
@@ -54,8 +60,8 @@ function saveListner() {
     saveEl.addEventListener("click", e => {
         e.preventDefault();
         game.saveScore();
-        inputEl.value = "";
-        messageEl.value = "";
+        
+        restart();
     })
 }
 
