@@ -5,6 +5,11 @@ export const State = {
     Started: Symbol("started"),
     Ended: Symbol("ended")
 }
+export const Result={
+    Win : Symbol('win'),
+    Greater : Symbol('greater'),
+    Smaller : Symbol('smaller')
+}
 
 export class Game {
     state = State.Idle;
@@ -34,12 +39,15 @@ export class Game {
 
         if (number === this._numberToFind) {
             this.end();
-            return true;
+            return Result.Win;
         }
-
-        return false;
+        if(number>this._numberToFind){
+            return Result.Smaller;
+        }
+        else{
+            return Result.Greater;
+        }
     }
-
 
     totalTime() {
         return Math.round((this._endTime.getTime() - this._startTime.getTime()) / 1000);

@@ -12,5 +12,8 @@ function init() {
 }
 
 function validateListener() {
-    validateEl.addEventListener("click", testValeur(inputEL.value))
+    validateEl.addEventListener("click", e=>{
+        e.preventDefault()
+        console.log(game.makeAttempt(inputEL.value))
+    })
 }
