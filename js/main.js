@@ -5,6 +5,8 @@ const validateEl = document.getElementById("validate");
 const restartEl = document.getElementById("restart");
 const messageEl = document.getElementById("message");
 const saveEl = document.getElementById("save-score");
+const resetEl=document.getElementById("reset");
+const searchEl=document.getElementById("search-by");
 
 let game = new Game();
 
@@ -13,6 +15,8 @@ function init() {
         validateListener();
         restartListener();
         saveListner();
+        resetListener();
+        searchListener();
         game.score.load();
     });
 }
@@ -51,6 +55,15 @@ function saveListner() {
         inputEl.value = "";
         messageEl.value = "";
     })
+}
+
+function resetListener(){
+    resetEl.addEventListener("click",e=>{
+        game.score.resetScore();
+    })
+}
+function searchListener(){
+    
 }
 
 init();

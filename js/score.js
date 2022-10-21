@@ -1,5 +1,5 @@
 import { UI } from "./ui.js";
-const score = []
+let score = []
 export class Score {
 
     constructor() {
@@ -28,6 +28,7 @@ export class Score {
 
     resetScore() {
         localStorage.clear();
+        score=[];
         UI.populateLeaderboard(score);
     }
 
