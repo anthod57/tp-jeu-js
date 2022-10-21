@@ -26,17 +26,26 @@ function init() {
         searchListener();
         maxAttemptsHandler();
         maxNameSizeHandler();
+        game.loadConfig();
         game.score.load();
+
+        maxNameSizeEl.value = game.config.maxNameSize;
+        maxNameSizeLabelEl.innerText = `Max Name Size (${maxNameSizeEl.value}):`;
+        maxAttemptsEl.value = game.config.maxAttempts;
+        maxAttemptsLabelEl.innerText = `Max Attempts (${maxAttemptsEl.value}):`;
     });
 }
 
 function validateListener() {
     validateEl.addEventListener("click", e => {
         e.preventDefault();
+        if (game.state === State.Ended) return;
+
         let res = game.makeAttempt(+inputEl.value);
         switch (res) {
             case Result.Win:
                 messageEl.innerText = `You Won with ${game.attempts} attempts`;
+                UI.showUserForm();
                 break;
             case Result.Greater:
                 messageEl.innerText = 'Greater';
@@ -44,6 +53,8 @@ function validateListener() {
             case Result.Smaller:
                 messageEl.innerHTML = 'Smaller';
                 break;
+            case Result.Lost:
+                messageEl.innerHTML = `YOU LOST (max of ${game.config.maxAttempts} attempts)`;
         }
     })
 }
