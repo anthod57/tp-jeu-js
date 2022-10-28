@@ -1,10 +1,8 @@
 @font-face {
   font-family: HappyHalloween;
-  src: url(./font/HappyHalloween.otf);
-}
+  src: url(./font/HappyHalloween.otf); }
 *:focus {
-  outline: none;
-}
+  outline: none; }
 
 html {
   height: 100%;
@@ -15,19 +13,17 @@ html {
   background-size: cover;
   margin: 0;
   padding: 0;
-  color: rgb(255, 123, 0);
+  color: #ff7b00;
   font-family: "HappyHalloween";
   font-size: 1.1em;
-  text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff, 1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
-}
+  text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff, 1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff; }
 
 body {
   backdrop-filter: blur(5px);
   height: 100%;
   width: 100%;
   margin: 0;
-  padding: 0;
-}
+  padding: 0; }
 
 main,
 .game {
@@ -35,8 +31,7 @@ main,
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
-}
+  gap: 1rem; }
 
 ul {
   list-style: none;
@@ -49,12 +44,10 @@ ul {
   margin-top: 1rem;
   max-height: 500px;
   overflow-y: auto;
-  width: 100%;
-}
-ul :first-child {
-  font-weight: bolder;
-  font-size: 1.25rem;
-}
+  width: 100%; }
+  ul :first-child {
+    font-weight: bolder;
+    font-size: 1.25rem; }
 
 main .input,
 main .user {
@@ -62,60 +55,52 @@ main .user {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
-}
+  gap: 1rem; }
 
-input {
+input, button {
   font-family: "HappyHalloween";
-  font-weight: lighter;
-}
+  font-weight: lighter; }
 
-input[type=button],
+input[type="button"],
 button {
   padding: 0.4rem 1rem;
   border-radius: 10px;
-  box-shadow: 0 0 5px 3px rgba(255, 123, 0, 0.5019607843);
+  box-shadow: 0 0 5px 3px #ff7b0080;
   border: none;
   min-width: 100px;
   background-color: #ff7b00;
   color: white;
   font-weight: 600;
   transition: 0.3s all;
-  cursor: pointer;
-}
-input[type=button]:hover,
-button:hover {
-  background-color: #850404;
-  box-shadow: 0 0 5px 6px rgba(133, 4, 4, 0.5019607843);
-}
+  cursor: pointer; }
+  input[type="button"]:hover,
+  button:hover {
+    background-color: #850404;
+    box-shadow: 0 0 5px 6px #85040480; }
 
-input[type=text] {
+input[type="text"] {
   text-align: center;
   padding: 0.3rem 0.5rem;
   border: none;
-  border-radius: 10px;
-}
+  border-radius: 10px; }
 
 .leaderboard {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  text-align: center;
-}
+  text-align: center; }
 
 .config-form {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 1rem;
-}
+  gap: 1rem; }
 
 .row {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-}
+  justify-content: center; }
 
 /*# sourceMappingURL=styles.css.map */
