@@ -74,6 +74,8 @@ function restart() {
   messageEl.innerText = "";
   inputEl.value = "";
   messageEl.value = "";
+  game.loadConfig();
+  game.score.load();
 }
 
 function restartListener() {
