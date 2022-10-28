@@ -9,10 +9,12 @@
 
 html {
 	height: 100%;
-	background-image: url("./img/552086.jpg");
-	background-repeat: no-repeat;
-	background-position: center;
+	background: url(./img/552086.jpg) no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
 	background-size: cover;
+
 	color: rgb(255, 123, 0);
 	font-family: "HappyHalloween";
 	font-size: 1.1em;
