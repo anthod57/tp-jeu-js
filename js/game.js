@@ -7,6 +7,7 @@ export const State = {
     Started: Symbol("started"),
     Ended: Symbol("ended"),
 };
+
 export const Result = {
     Win: Symbol("win"),
     Greater: Symbol("greater"),
@@ -19,28 +20,38 @@ export class Game {
         maxAttempts: 20,
         //maxStoredScore:0,
         maxNameSize: 20,
+        maxNumberToFind: 999,
+        maxTime: 0,
     };
 
     score = new Score();
     state = State.Idle;
 
     constructor() {
-        this._numberToFind = getRandomInt(1, 99);
         this._attempts = 1;
         this._endTime = 0;
+        this._maxTime = 0;
         this._startTime = 0;
     }
 
     start() {
-        this._startTime = new Date();
+        this._startTime = moment();
+
+        if (this._config.maxTime > 0) {
+            this._maxTime = moment(this._startTime);
+            this._maxTime.add(this._config.maxTime, "seconds");
+        }
+
         this.state = State.Started;
         this._attempts = 1;
+        this._numberToFind = getRandomInt(1, +this._config.maxNumberToFind);
+
         console.log(this._numberToFind);
     }
 
     end() {
         this.state = State.Ended;
-        this._endTime = new Date();
+        this._endTime = moment();
     }
 
     makeAttempt(number) {
@@ -68,12 +79,6 @@ export class Game {
         } else {
             return Result.Greater;
         }
-    }
-
-    totalTime() {
-        return Math.round(
-            (this._endTime.getTime() - this._startTime.getTime()) / 1000
-        );
     }
 
     saveScore() {
@@ -113,5 +118,17 @@ export class Game {
 
     get attempts() {
         return this._attempts;
+    }
+
+    get startTime() {
+        return this._startTime;
+    }
+
+    get maxTime() {
+        return this._maxTime;
+    }
+
+    get endTime() {
+        return this._endTime;
     }
 }
