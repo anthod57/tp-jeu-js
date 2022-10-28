@@ -11,8 +11,27 @@
 		<main>
 			<h1>Jeu plus ou moins</h1>
 			<div class="game">
+				<div class="config-form">
+					<div class="row">
+						<label id="max-attempts-label" for="max-attempts">Max Attempts (20):</label>
+						<input type="range" name="max-attemps" id="max-attempts" min="1" max="20" value="20" step="1" />
+					</div>
+					<div class="row">
+						<label id="max-name-size-label" for="max-name-size">Max Name Size (20):</label>
+						<input type="range" name="max-name-size" id="max-name-size" min="1" max="20" value="20" step="1" />
+					</div>
+					<div class="row">
+						<label id="range-number-label" for="range-number">Max number to find (99):</label>
+						<input type="range" name="range-number" id="range-number" min="99" max="999" value="99" step="100" />
+					</div>
+					<div class="row">
+						<label id="max-time-label" for="max-time"> </label>
+						<input type="range" name="max-time" id="max-time" min="0" max="120" value="0" step="1" />
+					</div>
+				</div>
 				<div class="input">
-					<label for="entre">Entrer un nombre entre 1 et 99</label>
+					<label id="entre-label" for="entre">Entrer un nombre entre 1 et 99</label>
+					<div id="timer"></div>
 					<input type="text" id="entre" name="entre" />
 				</div>
 
@@ -43,6 +62,7 @@
 				<button name="reset" id="reset">Reset</button>
 			</div>
 		</main>
+		<script src="js/moment.js"></script>
 		<script type="module" src="js/main.js"></script>
 	</body>
 </html>
