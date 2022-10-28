@@ -55,21 +55,24 @@ function validateListener() {
     if (game.state === State.Ended) return;
 
     if (game.state === State.Idle) {
-      clearInterval(Timer);
 
-      Timer = setInterval(() => {
-        if (game.state === State.Ended) {
-          clearInterval(Timer);
-        }
 
-        let diff = game._maxTime.diff(moment());
+      if (game.config.maxTime > 0) {
+        clearInterval(Timer);
+        Timer = setInterval(() => {
+          if (game.state === State.Ended) {
+            clearInterval(Timer);
+          }
 
-        if (diff <= 0) {
-          clearInterval(Timer);
-          game.end();
-          messageEl.innerHTML = `TIMES OUT`;
-        }
-      }, 100);
+          let diff = game._maxTime.diff(moment());
+
+          if (diff <= 0) {
+            clearInterval(Timer);
+            game.end();
+            messageEl.innerHTML = `TIMES OUT`;
+          }
+        }, 100);
+      }
     }
 
     let res = game.makeAttempt(+inputEl.value);
