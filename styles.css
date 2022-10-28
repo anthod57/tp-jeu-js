@@ -82,11 +82,34 @@ button {
   font-weight: 600;
   transition: 0.3s all;
   cursor: pointer;
+  position: relative;
+}
+input[type=button]::after,
+button::after {
+  display: flex;
+  align-items: flex-end;
+  height: 100%;
+  width: 80%;
+  justify-content: flex-end;
+  content: "\f043";
+  font-family: "Font Awesome 6 Free";
+  color: #cb0202;
+  position: absolute;
+  left: 0;
+  transition: 0.25s all;
+  bottom: 0;
+  opacity: 0;
+  font-size: 1.1rem;
 }
 input[type=button]:hover,
 button:hover {
   background-color: #850404;
   box-shadow: 0 0 5px 6px rgba(133, 4, 4, 0.5019607843);
+}
+input[type=button]:hover::after,
+button:hover::after {
+  bottom: -1.1rem;
+  opacity: 1;
 }
 
 input[type=text] {
