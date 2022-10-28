@@ -68,18 +68,18 @@ input[type="button"],
 button {
 	padding: 0.4rem 1rem;
 	border-radius: 10px;
-	box-shadow: 0 0 5px 3px rgb(255, 123, 0, 50%);
+	box-shadow: 0 0 5px 3px #ff7b0080;
 	border: none;
 	min-width: 100px;
-	background-color: rgb(255, 123, 0);
+	background-color: #ff7b00;
 	color: white;
 	font-weight: 600;
 	transition: 0.3s all;
 	cursor: pointer;
 
 	&:hover {
-		background-color: rgb(133, 4, 4);
-		box-shadow: 0 0 5px 6px rgb(133, 4, 4, 50%);
+		background-color: #850404;
+		box-shadow: 0 0 5px 6px #85040480;
 	}
 }
 
@@ -100,9 +100,10 @@ input[type="text"] {
 
 .config-form {
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
+	flex-wrap: wrap;
 	justify-content: center;
-	gap: 0.5rem;
+	gap: 1rem;
 }
 
 .row {
