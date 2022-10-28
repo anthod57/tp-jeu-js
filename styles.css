@@ -1,11 +1,24 @@
+@font-face {
+  font-family: HappyHalloween;
+  src: url(./font/HappyHalloween.otf); }
+html {
+  height: 100%;
+  background-image: url("./img/552086.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  color: #ff7b00;
+  font-family: 'HappyHalloween';
+  font-size: 1.1em;
+  text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff, 1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff; }
+
 main,
 .game {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
-}
+  gap: 1rem; }
 
 ul {
   list-style: none;
@@ -18,12 +31,10 @@ ul {
   margin-top: 1rem;
   max-height: 300px;
   overflow-y: auto;
-  width: 100%;
-}
-ul :first-child {
-  font-weight: bolder;
-  font-size: 1.25rem;
-}
+  width: 100%; }
+  ul :first-child {
+    font-weight: bolder;
+    font-size: 1.25rem; }
 
 main .input,
 main .user {
@@ -31,28 +42,24 @@ main .user {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
-}
+  gap: 1rem; }
 
 .leaderboard {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  text-align: center;
-}
+  text-align: center; }
 
 .config-form {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 0.5rem;
-}
+  gap: 0.5rem; }
 
 .row {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-}
+  justify-content: center; }
 
 /*# sourceMappingURL=styles.css.map */
