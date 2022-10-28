@@ -21,6 +21,7 @@ const maxTimeEl = document.getElementById("max-time");
 const maxTimeLabelEl = document.getElementById("max-time-label");
 
 let game = new Game();
+let Timer;
 
 function init() {
   window.addEventListener("DOMContentLoaded", () => {
@@ -53,6 +54,24 @@ function validateListener() {
     e.preventDefault();
     if (game.state === State.Ended) return;
 
+    if (game.state === State.Idle) {
+      clearInterval(Timer);
+
+      Timer = setInterval(() => {
+        if (game.state === State.Ended) {
+          clearInterval(Timer);
+        }
+
+        let diff = game._maxTime.diff(moment());
+
+        if (diff <= 0) {
+          clearInterval(Timer);
+          game.end();
+          messageEl.innerHTML = `TIMES OUT`;
+        }
+      }, 100);
+    }
+
     let res = game.makeAttempt(+inputEl.value);
     switch (res) {
       case Result.Win:
@@ -69,6 +88,8 @@ function validateListener() {
         messageEl.innerHTML = `YOU LOST (max of ${game.config.maxAttempts} attempts)`;
     }
   });
+
+  inputEl.value = "";
 }
 
 function restart() {
@@ -93,8 +114,8 @@ function saveListner() {
     if (UI.getUserName().length > game.config.maxNameSize) {
       alert(
         "Veuillez entrer un maximum de " +
-          game.config.maxNameSize +
-          " caractères."
+        game.config.maxNameSize +
+        " caractères."
       );
       return;
     }
