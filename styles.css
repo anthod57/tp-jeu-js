@@ -65,7 +65,7 @@ main .user {
   gap: 1rem;
 }
 
-input {
+input, button {
   font-family: "HappyHalloween";
   font-weight: lighter;
 }
