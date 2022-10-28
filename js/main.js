@@ -108,7 +108,6 @@ function restart() {
   inputEl.value = "";
   messageEl.value = "";
   game.loadConfig();
-  game.score.load();
   timerEl.innerText = "";
 }
 
@@ -125,8 +124,8 @@ function saveListner() {
     if (UI.getUserName().length > game.config.maxNameSize) {
       alert(
         "Veuillez entrer un maximum de " +
-          game.config.maxNameSize +
-          " caractères."
+        game.config.maxNameSize +
+        " caractères."
       );
       return;
     }
