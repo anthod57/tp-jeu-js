@@ -19,6 +19,7 @@ const maxNumberEl = document.getElementById("range-number");
 const maxNumberLabelEl = document.getElementById("range-number-label");
 const maxTimeEl = document.getElementById("max-time");
 const maxTimeLabelEl = document.getElementById("max-time-label");
+const timerEl = document.getElementById("timer");
 
 let game = new Game();
 let Timer;
@@ -48,51 +49,57 @@ function init() {
     maxTimeLabelEl.innerText = `Max Time to win (${maxTimeEl.value}s):`;
   });
 }
+function validerHandler() {
+  if (game.state === State.Ended) return;
 
+  if (game.state === State.Idle) {
+    if (game.config.maxTime > 0) {
+      clearInterval(Timer);
+      Timer = setInterval(() => {
+        if (game.state === State.Ended) {
+          clearInterval(Timer);
+        }
+
+        let diff = game._maxTime.diff(moment());
+
+        if (diff <= 0) {
+          clearInterval(Timer);
+          game.end();
+          messageEl.innerHTML = `TIMES OUT`;
+        }
+        timerEl.innerText = moment(diff).format("mm:ss");
+      }, 100);
+    }
+  }
+
+  let res = game.makeAttempt(+inputEl.value);
+  switch (res) {
+    case Result.Win:
+      messageEl.innerText = `You Won with ${game.attempts} attempts`;
+      UI.showUserForm();
+      break;
+    case Result.Greater:
+      messageEl.innerText = "Greater";
+      break;
+    case Result.Smaller:
+      messageEl.innerHTML = "Smaller";
+      break;
+    case Result.Lost:
+      messageEl.innerHTML = `YOU LOST (max of ${game.config.maxAttempts} attempts)`;
+  }
+  inputEl.value = "";
+}
 function validateListener() {
   validateEl.addEventListener("click", (e) => {
     e.preventDefault();
-    if (game.state === State.Ended) return;
-
-    if (game.state === State.Idle) {
-
-
-      if (game.config.maxTime > 0) {
-        clearInterval(Timer);
-        Timer = setInterval(() => {
-          if (game.state === State.Ended) {
-            clearInterval(Timer);
-          }
-
-          let diff = game._maxTime.diff(moment());
-
-          if (diff <= 0) {
-            clearInterval(Timer);
-            game.end();
-            messageEl.innerHTML = `TIMES OUT`;
-          }
-        }, 100);
-      }
-    }
-
-    let res = game.makeAttempt(+inputEl.value);
-    switch (res) {
-      case Result.Win:
-        messageEl.innerText = `You Won with ${game.attempts} attempts`;
-        UI.showUserForm();
-        break;
-      case Result.Greater:
-        messageEl.innerText = "Greater";
-        break;
-      case Result.Smaller:
-        messageEl.innerHTML = "Smaller";
-        break;
-      case Result.Lost:
-        messageEl.innerHTML = `YOU LOST (max of ${game.config.maxAttempts} attempts)`;
+    validerHandler();
+  });
+  inputEl.addEventListener("keyup", (e) => {
+    e.preventDefault();
+    if (e.key === "Enter") {
+      validerHandler();
     }
   });
-
-  inputEl.value = "";
 }
 
 function restart() {
@@ -102,6 +109,7 @@ function restart() {
   messageEl.value = "";
   game.loadConfig();
   game.score.load();
+  timerEl.innerText = "";
 }
 
 function restartListener() {
@@ -117,8 +125,8 @@ function saveListner() {
     if (UI.getUserName().length > game.config.maxNameSize) {
       alert(
         "Veuillez entrer un maximum de " +
-        game.config.maxNameSize +
-        " caractères."
+          game.config.maxNameSize +
+          " caractères."
       );
       return;
     }
