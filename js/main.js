@@ -3,6 +3,7 @@ import { tabScore } from "./score.js";
 import { UI } from "./ui.js";
 
 const inputEl = document.getElementById("entre");
+const inputLabelEl = document.getElementById("entre-label");
 const validateEl = document.getElementById("validate");
 const restartEl = document.getElementById("restart");
 const messageEl = document.getElementById("message");
@@ -41,6 +42,7 @@ function init() {
     maxAttemptsLabelEl.innerText = `Max Attempts (${maxAttemptsEl.value}):`;
     maxNumberEl.value = game.config.maxNumberToFind;
     maxNumberLabelEl.innerText = `Max number to find (${maxNumberEl.value}):`;
+    inputLabelEl.innerText = `Entrer un nombre entre 1 et ${maxNumberEl.value}`;
     maxTimeEl.value = game.config.maxTime;
     maxTimeLabelEl.innerText = `Max Time to win (${maxTimeEl.value}s):`;
   });
@@ -140,6 +142,7 @@ function maxNameSizeHandler() {
 function maxNumberHandler() {
   maxNumberEl.addEventListener("input", (e) => {
     maxNumberLabelEl.innerText = `Max number to find (${e.target.value}):`;
+    inputLabelEl.innerText = `Entrer un nombre entre 1 et ${e.target.value}`;
     game.config = { maxNumberToFind: +e.target.value };
   });
 }
