@@ -19,13 +19,13 @@ export class Game {
         maxAttempts: 20,
         //maxStoredScore:0,
         maxNameSize: 20,
+        maxNumberToFind: 999,
     };
 
     score = new Score();
     state = State.Idle;
 
     constructor() {
-        this._numberToFind = getRandomInt(1, 99);
         this._attempts = 1;
         this._endTime = 0;
         this._startTime = 0;
@@ -35,6 +35,8 @@ export class Game {
         this._startTime = new Date();
         this.state = State.Started;
         this._attempts = 1;
+        console.log(this._config);
+        this._numberToFind = getRandomInt(1, +this._config.maxNumberToFind);
         console.log(this._numberToFind);
     }
 
