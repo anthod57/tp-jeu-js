@@ -14,111 +14,139 @@ const maxAttemptsLabelEl = document.getElementById("max-attempts-label");
 const maxNameSizeLabelEl = document.getElementById("max-name-size-label");
 //const maxStoredScoreEl=document.getElementById("");
 const maxNameSizeEl = document.getElementById("max-name-size");
+const maxNumberEl = document.getElementById("range-number");
+const maxNumberLabelEl = document.getElementById("range-number-label");
+const maxTimeEl = document.getElementById("max-time");
+const maxTimeLabelEl = document.getElementById("max-time-label");
 
 let game = new Game();
 
 function init() {
-    window.addEventListener("DOMContentLoaded", () => {
-        validateListener();
-        restartListener();
-        saveListner();
-        resetListener();
-        searchListener();
-        maxAttemptsHandler();
-        maxNameSizeHandler();
-        game.loadConfig();
-        game.score.load();
+  window.addEventListener("DOMContentLoaded", () => {
+    validateListener();
+    restartListener();
+    saveListner();
+    resetListener();
+    searchListener();
+    maxAttemptsHandler();
+    maxNameSizeHandler();
+    maxNumberHandler();
+    maxTimeHandler();
+    game.loadConfig();
+    game.score.load();
 
-        maxNameSizeEl.value = game.config.maxNameSize;
-        maxNameSizeLabelEl.innerText = `Max Name Size (${maxNameSizeEl.value}):`;
-        maxAttemptsEl.value = game.config.maxAttempts;
-        maxAttemptsLabelEl.innerText = `Max Attempts (${maxAttemptsEl.value}):`;
-    });
+    maxNameSizeEl.value = game.config.maxNameSize;
+    maxNameSizeLabelEl.innerText = `Max Name Size (${maxNameSizeEl.value}):`;
+    maxAttemptsEl.value = game.config.maxAttempts;
+    maxAttemptsLabelEl.innerText = `Max Attempts (${maxAttemptsEl.value}):`;
+    maxNumberEl.value = game.config.maxNumberToFind;
+    maxNumberLabelEl.innerText = `Max number to find (${maxNumberEl.value}):`;
+    maxTimeEl.value = game.config.maxTime;
+    maxTimeLabelEl.innerText = `Max Time to win (${maxTimeEl.value}s):`;
+  });
 }
 
 function validateListener() {
-    validateEl.addEventListener("click", e => {
-        e.preventDefault();
-        if (game.state === State.Ended) return;
+  validateEl.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (game.state === State.Ended) return;
 
-        let res = game.makeAttempt(+inputEl.value);
-        switch (res) {
-            case Result.Win:
-                messageEl.innerText = `You Won with ${game.attempts} attempts`;
-                UI.showUserForm();
-                break;
-            case Result.Greater:
-                messageEl.innerText = 'Greater';
-                break;
-            case Result.Smaller:
-                messageEl.innerHTML = 'Smaller';
-                break;
-            case Result.Lost:
-                messageEl.innerHTML = `YOU LOST (max of ${game.config.maxAttempts} attempts)`;
-        }
-    })
+    let res = game.makeAttempt(+inputEl.value);
+    switch (res) {
+      case Result.Win:
+        messageEl.innerText = `You Won with ${game.attempts} attempts`;
+        UI.showUserForm();
+        break;
+      case Result.Greater:
+        messageEl.innerText = "Greater";
+        break;
+      case Result.Smaller:
+        messageEl.innerHTML = "Smaller";
+        break;
+      case Result.Lost:
+        messageEl.innerHTML = `YOU LOST (max of ${game.config.maxAttempts} attempts)`;
+    }
+  });
 }
 
 function restart() {
-    game = new Game();
-    messageEl.innerText = "";
-    inputEl.value = "";
-    messageEl.value = "";
+  game = new Game();
+  messageEl.innerText = "";
+  inputEl.value = "";
+  messageEl.value = "";
 }
 
 function restartListener() {
-    restartEl.addEventListener("click", e => {
-        e.preventDefault();
+  restartEl.addEventListener("click", (e) => {
+    e.preventDefault();
 
-        restart()
-    })
+    restart();
+  });
 }
 
 function saveListner() {
-    saveEl.addEventListener("click", e => {
-        if (UI.getUserName().length > game.config.maxNameSize) {
-            alert("Veuillez entrer un maximum de " + game.config.maxNameSize + " caractères.");
-            return;
-        }
-        e.preventDefault();
-        game.saveScore();
+  saveEl.addEventListener("click", (e) => {
+    if (UI.getUserName().length > game.config.maxNameSize) {
+      alert(
+        "Veuillez entrer un maximum de " +
+          game.config.maxNameSize +
+          " caractères."
+      );
+      return;
+    }
+    e.preventDefault();
+    game.saveScore();
 
-        restart();
-    })
+    restart();
+  });
 }
 
 function resetListener() {
-    resetEl.addEventListener("click", e => {
-        game.score.resetScore();
-    })
+  resetEl.addEventListener("click", (e) => {
+    game.score.resetScore();
+  });
 }
 function searchListener() {
-    searchEl.addEventListener("keyup", e => {
-        let username = e.target.value;
+  searchEl.addEventListener("keyup", (e) => {
+    let username = e.target.value;
 
-        if (username === "") {
-            UI.populateLeaderboard(tabScore);
-            return;
-        }
+    if (username === "") {
+      UI.populateLeaderboard(tabScore);
+      return;
+    }
 
-        let find = game.score.searchByName(username);
+    let find = game.score.searchByName(username);
 
-        UI.populateLeaderboard(find);
-    })
+    UI.populateLeaderboard(find);
+  });
 }
 
 function maxAttemptsHandler() {
-    maxAttemptsEl.addEventListener("input", e => {
-        maxAttemptsLabelEl.innerText = `Max Attempts (${e.target.value}):`;
-        game.config = { maxAttempts: +e.target.value };
-    })
+  maxAttemptsEl.addEventListener("input", (e) => {
+    maxAttemptsLabelEl.innerText = `Max Attempts (${e.target.value}):`;
+    game.config = { maxAttempts: +e.target.value };
+  });
 }
 
 function maxNameSizeHandler() {
-    maxNameSizeEl.addEventListener("input", e => {
-        maxNameSizeLabelEl.innerText = `Max Name Size (${e.target.value}):`;
-        game.config = { maxNameSize: +e.target.value };
-    })
+  maxNameSizeEl.addEventListener("input", (e) => {
+    maxNameSizeLabelEl.innerText = `Max Name Size (${e.target.value}):`;
+    game.config = { maxNameSize: +e.target.value };
+  });
+}
+
+function maxNumberHandler() {
+  maxNumberEl.addEventListener("input", (e) => {
+    maxNumberLabelEl.innerText = `Max number to find (${e.target.value}):`;
+    game.config = { maxNumberToFind: +e.target.value };
+  });
+}
+
+function maxTimeHandler() {
+  maxTimeEl.addEventListener("input", (e) => {
+    maxTimeLabelEl.innerText = `Max Time to win (${e.target.value}s):`;
+    game.config = { maxTime: +e.target.value };
+  });
 }
 
 init();
